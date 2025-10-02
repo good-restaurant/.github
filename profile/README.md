@@ -1,15 +1,8 @@
 # good-restuarant project
 
-[TOC]
-
-## github project
-
-<https://github.com/orgs/good-restaurant/projects/1>
-
 ## 소개
 
 ## 프로젝트 비교
-
 
 ## 프로젝트 목표
 
