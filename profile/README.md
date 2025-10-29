@@ -1,7 +1,5 @@
 # good-restuarant project
 
-[TOC]
-
 삼시세끼 모범밥상 프로젝트
 
 ## 소개
