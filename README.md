@@ -1,5 +1,7 @@
 # good-restuarant project
 
+<https://goodservice.i4624.info>
+
 ## github project
 
 <https://github.com/orgs/good-restaurant/projects/1>
