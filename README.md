@@ -3,3 +3,57 @@
 ## github project
 
 <https://github.com/orgs/good-restaurant/projects/1>
+
+## entire project architecture
+
+```mermaid
+flowchart TD
+
+    %% 클라이언트 계층
+    user --> gs-client
+    class user,gs-client clientLayer
+
+    gs-client --> gs-main-api
+    gs-client --> gs-s3object-api
+    gs-client --> gs-geoserver
+
+    %% 서버간 통신
+    gs-main-api --> gs-s3object-api
+
+    %% 애플리케이션 계층
+    gs-main-api --> gs-database
+    gs-s3object-api --> gs-database
+    class gs-main-api,gs-s3object-api,gs-geoserver,gs-database appLayer
+
+    %% 오브젝트 스토리지 계층
+    gs-s3object-api --> cephRGW --> cephVM
+    class cephRGW,cephVM storageLayer
+
+    %% 컨테이너 호스팅 계층
+    gs-client --> nodecontainer
+    gs-main-api --> jvmcontainer
+    gs-geoserver --> containerGeoserver
+    gs-database --> postgrescontainer
+    gs-s3object-api --> jvmcontainer
+
+    nodecontainer --> runnerVM
+    containerGeoserver --> runnerVM
+    postgrescontainer --> runnerVM
+    jvmcontainer --> runnerVM
+    class nodecontainer,containerGeoserver,postgrescontainer,jvmcontainer containerLayer
+
+    %% VM 및 호스트
+    cephVM --> proxmoxNode
+    runnerVM --> proxmoxNode
+    class runnerVM,proxmoxNode infraLayer
+
+
+    %% 색상 정의
+    classDef clientLayer fill:#90c8ff,stroke:#1e4f9c,stroke-width:1px
+    classDef appLayer fill:#b5e8b0,stroke:#1d7c3a,stroke-width:1px
+    classDef storageLayer fill:#ffd39c,stroke:#b26b00,stroke-width:1px
+    classDef containerLayer fill:#dab6ff,stroke:#7c3aed,stroke-width:1px
+    classDef infraLayer fill:#d7d7d7,stroke:#6b6b6b,stroke-width:1px
+
+
+```
